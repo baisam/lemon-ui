@@ -1,0 +1,25 @@
+{
+  "name": "bootstrap-editable",
+  "version": "1.0.1",
+  "description": "x-editable bootstrap 3 npm package",
+  "main": "js/index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barisbora/bootstrap-editable.git"
+  },
+  "keywords": [
+    "x-editable",
+    "bootstrap",
+    "editable"
+  ],
+  "author": "Barış Bora",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/barisbora/bootstrap-editable/issues"
+  },
+  "homepage": "https://github.com/barisbora/bootstrap-editable#readme",
+  "style": "css/bootstrap-editable.css"
+}

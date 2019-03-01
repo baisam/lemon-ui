@@ -1,0 +1,24 @@
+{
+    "name": "baisam/lemon-ui",
+    "description": "The web ui suite for laravel framework.",
+    "keywords": ["laravel", "ui", "layout", "form", "grid", "chart"],
+    "type": "library",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0",
+        "laravel/framework": "5.5.*",
+        "mews/captcha": "^2.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Baisam development team",
+            "email": "liangyibo12@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "BaiSam\\UI\\": "src"
+        }
+    }
+}

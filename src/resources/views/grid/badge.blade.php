@@ -1,0 +1,1 @@
+<span class="{{ $shape }} @isset($color)bg-{{ $color }}@endisset">{{ $value }}</span>

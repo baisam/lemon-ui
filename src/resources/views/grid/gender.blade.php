@@ -1,0 +1,1 @@
+{{empty($value) ? $map[0] : (isset($map[$value]) ? $map[$value] : $value)}}
