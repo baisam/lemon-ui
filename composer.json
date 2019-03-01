@@ -20,5 +20,12 @@
         "psr-4": {
             "BaiSam\\UI\\": "src"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BaiSam\\UI\\UIServiceProvider"
+            ]
+        }
     }
 }
