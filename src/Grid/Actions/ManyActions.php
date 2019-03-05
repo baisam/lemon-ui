@@ -28,6 +28,7 @@ use BaiSam\UI\Grid\Traits\ActionRender;
  * @method \BaiSam\UI\Grid\Actions\SearchAction     search($name, $label)
  * @method \BaiSam\UI\Grid\Actions\CheckboxAction   checkbox($name, $label)
  * @method \BaiSam\UI\Grid\Actions\RadioAction      radio($name, $label)
+ * @method \BaiSam\UI\Grid\Actions\DateRangeAction  daterange($name, $label = null, array $config = [])
  *
  * @package BaiSam\UI\Grid\Actions
  */
@@ -44,7 +45,7 @@ class ManyActions extends Element implements Action
      * 默认支持的Action
      * @var array
      */
-    protected $supportActionNames = ['bulk', 'button', 'dropdown', 'filter', 'link', 'search', 'submit', 'checkbox', 'radio'];
+    protected $supportActionNames = ['bulk', 'button', 'dropdown', 'filter', 'link', 'search', 'submit', 'checkbox', 'radio', 'daterange'];
 
     /**
      * @var string
@@ -73,7 +74,7 @@ class ManyActions extends Element implements Action
 
     public function needSelectRow()
     {
-        foreach($this->items as $item) {
+        foreach ($this->items as $item) {
             if ($item instanceof Action && $item->needSelectRow()) {
                 return true;
             }
@@ -103,8 +104,7 @@ class ManyActions extends Element implements Action
 
             if ($item instanceof Action) {
                 $items[] = $item->render(...$this->params);
-            }
-            else {
+            } else {
                 $items[] = $item;
             }
         }
