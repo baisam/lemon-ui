@@ -17,7 +17,7 @@ use BaiSam\UI\Grid\Traits\ActionRender;
 use BaiSam\UI\UIRepository;
 use Illuminate\Support\Facades\Request;
 
-class DateRangeAction extends DateRange implements Action
+class DaterangeAction extends DateRange implements Action
 {
     use ActionRender;
 
