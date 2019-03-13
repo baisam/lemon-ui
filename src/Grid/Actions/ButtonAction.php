@@ -61,7 +61,7 @@ class ButtonAction extends Button implements Action
             }
         }
 
-        return parent::formatAttributes() . implode(' ', $events);
+        return parent::formatAttributes() . ' ' . implode(' ', $events);
     }
 
     /**

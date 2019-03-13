@@ -232,7 +232,7 @@ class Menu extends Element implements Sortable
     /**
      * @return string
      */
-    protected function formatUrl()
+    public function formatUrl()
     {
         if (empty($this->url)) {
             return '';
