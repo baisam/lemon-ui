@@ -300,11 +300,11 @@ class Column implements Sortable
         $value = $row->{$this->key};
 
         if (isset($this->format)) {
-            if ($this->render instanceof Format) {
-                $this->render->format($this->format);
-            }
-            else if (is_callable($this->format)) {
+            if (is_callable($this->format)) {
                 $value = call_user_func($this->format, $value, $row, $builder);
+            }
+            else if ($this->render instanceof Format) {
+                $this->render->format($this->format);
             }
         }
 
