@@ -97,13 +97,16 @@ class DropdownAction extends DropDown implements Action
      *
      * @param string $name
      * @param string $label
-     * @return $this
+     * @return ButtonAction
      */
     public function button($name, $label)
     {
         //TODO
+        $button = new ButtonAction($name, $label);
 
-        return $this;
+        $this->push($button);
+
+        return $button;
     }
 
     /**
