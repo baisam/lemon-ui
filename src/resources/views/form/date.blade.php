@@ -2,7 +2,7 @@
     <span class="input-group-addon">
         <i class="fa fa-calendar"></i>
     </span>
-    <input id="{{ $id }}" type="text" name="{{ $name }}" value="{{ $value }}" placeholder="{{ $placeholder }}" class="form-control {{ $class }}" {!! $attributes !!}>
+    <input id="{{ $id }}" type="text" name="{{ $name }}" value="{{ $value }}" placeholder="{{ $placeholder }}" class="form-control {{ $class }}" autocomplete="off" {!! $attributes !!}>
 </div>
 @php
     $config['locale'] = config('app.locale');
