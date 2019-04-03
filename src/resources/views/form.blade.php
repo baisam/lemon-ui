@@ -54,29 +54,49 @@
 
     <div class="box-footer clearfix">
         <div class="col-sm-{{ isset($content_width) ? $content_width : 10 }} col-sm-offset-{{ isset($label_width) ? $label_width : 2 }}">
-            @if( isset($submitButton) )
+            @isset($submitButton)
                 @php
                 $submitButton->attribute('data-loading-text', new \Illuminate\Support\HtmlString("<i class='fa fa-spinner fa-spin '></i>". $submitButton->getLabel()) );
                 $submitButton->addClass('margin-r-5');
                 @endphp
                 {{ $submitButton }}
-            @endif
+            @endisset
 
-            @if( isset($resetButton) )
-                @php($cancelButton->addClass('margin-r-5'))
+            @isset($resetButton)
+                @php $cancelButton->addClass('margin-r-5') @endphp
                 {{ $resetButton }}
-            @endif
+            @endisset
 
-            @if( isset($cancelButton) )
-                @php($cancelButton->addClass(['pull-left', 'margin-r-5']))
+            @isset($cancelButton)
+                @php $cancelButton->addClass(['pull-left', 'margin-r-5']) @endphp
                 {{ $cancelButton }}
-            @endif
+            @endisset
         </div>
     </div>
     <!-- /.box-footer -->
 </div>
 </form>
-@if(isset($cancelButton))
+
+@isset($submitButton)
+@php
+    $options = [
+        'push' => false,
+        'replace' => false,
+        'scrollTo' => false
+    ];
+
+    if (isset($timeout)) {
+        $options['timeout'] = $timeout;
+    }
+@endphp
+@script
+$('#{{ $submitButton->getId() }}').closest('form').submit(function(event) {
+    $.pjax.submit(event, @json($options));
+    return false;
+});
+@endscript
+@endisset
+@isset($cancelButton)
 @script
 $('#{{ $cancelButton->getId() }}').click(function() {
     if ($(this).parents('.modal').length > 0) {
@@ -92,4 +112,4 @@ $('#{{ $cancelButton->getId() }}').click(function() {
     }
 });
 @endscript
-@endif
+@endisset
