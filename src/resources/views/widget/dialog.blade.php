@@ -85,13 +85,17 @@ function dialog_{{ $id }}_{{ $iteration }}_show({{ $args }}) {
     $('#modal_{{ $id }}').find('.modal-body').html(html);
     @if($url)
     // Load pjax content
-    $.pjax({
+    var options = {
         url: "{!! $url !!}",
         push: false,
         replace: true,
         scrollTo: false,
         container: '#modal_{{ $id }}_pjax_content'
-    });
+    }
+    @isset($timeout)
+    options.timeout = {{ $timeout }};
+    @endisset
+    $.pjax(options);
     $('#modal_{{ $id }}_pjax_content').off('pjax:beforeReplace').bind('pjax:beforeReplace', function(e, _d) {
         if (_d && _d[0] && $.trim(_d[0].nodeValue) != "###PJAX###") {
             try {
