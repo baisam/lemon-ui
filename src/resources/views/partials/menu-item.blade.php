@@ -1,5 +1,5 @@
 @if($label && isset($level))
-<a href="{{ $url }}">
+<a href="{{ $url }}" nopjax>
     @if($icon)
     <i class="fa fa-{{ $icon }}"></i>
     @endif
