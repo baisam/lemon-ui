@@ -1,7 +1,7 @@
 <!-- Main Header -->
 <header class="main-header">
     <!-- Logo -->
-    <a href="{{ url('/') }}" class="logo" nopjax>
+    <a href="{{ route('home') }}" class="logo" nopjax>
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">{{ config('app.name', '佰尚') }}</span>
         <!-- logo for regular state and mobile devices -->
