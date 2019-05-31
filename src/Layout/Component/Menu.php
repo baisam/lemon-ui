@@ -44,6 +44,16 @@ class Menu extends Element implements Sortable
     protected $url;
 
     /**
+     * @var array
+     */
+    protected $params = [];
+
+    /**
+     * @var boolean
+     */
+    protected $secure = null;
+
+    /**
      * @var int
      */
     protected $level = 0;
@@ -65,11 +75,13 @@ class Menu extends Element implements Sortable
      */
     protected $view = 'ui::partials.menu-item';
 
-    public function __construct(string $id, string $label = null)
+    public function __construct(string $id, string $label = null, $params = [], $secure = null)
     {
         parent::__construct($id);
 
         $this->label = $label;
+        $this->params = $params;
+        $this->secure = $secure;
     }
 
     /**
@@ -123,11 +135,15 @@ class Menu extends Element implements Sortable
      * Set the url.
      *
      * @param string $url
+     * @param array|null $params
+     * @param boolean|null $secure
      * @return $this
      */
-    public function url($url)
+    public function url($url, $params = [], $secure = null)
     {
         $this->url = $url;
+        $this->params = $params;
+        $this->secure = $secure;
 
         return $this;
     }
@@ -238,7 +254,7 @@ class Menu extends Element implements Sortable
             return '';
         }
 
-        return url($this->url);
+        return url($this->url, $this->params, $this->secure);
     }
 
     /**
