@@ -87,6 +87,9 @@ class Badge extends AbstractRender
             if (is_array($this->color)) {
                 return array_has($this->color, $value) ? array_get($this->color, $value) : null;
             }
+            if (is_callable($this->color)) {
+                return call_user_func($this->color, $value);
+            }
 
             return $this->color;
         }

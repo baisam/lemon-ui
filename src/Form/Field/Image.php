@@ -24,6 +24,9 @@ class Image extends File
         }
 
         parent::__construct($column, $label, $config);
+
+        // 默认启用图片预览功能
+        $this->enablePreview();
     }
 
     //TODO 生成缩略图

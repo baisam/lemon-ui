@@ -22,7 +22,7 @@ use Illuminate\Support\HtmlString;
  * @method Render\Actions           actions(Closure $callback)
  * @method Render\Badge             badge($values = [])
  * @method Render\Date              date($format = null)
- * @method Render\Image             image()
+ * @method Render\Image             image($width = null, $height = null)
  * @method Render\Link              link()
  * @method Render\Number            number()
  * @method Render\Phone             phone()

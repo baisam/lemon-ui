@@ -39,6 +39,10 @@ trait ActionRender
         return parent::formatId();
     }
 
+    /**
+     * @param boolean|callable $visible
+     * @return $this
+     */
     public function visible($visible)
     {
         $this->visibility = $visible;
