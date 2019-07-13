@@ -302,7 +302,7 @@ trait Upload
 
         // 解析存储路径
         // {year} {month} {day} {dispersion}
-        $path = $this->getSetting('path.format', '{dispersion}');
+        $path = $this->getSetting('path', '{dispersion}');
 
         // 根据文件的md5生成文件名
         $filename = md5_file($file->getRealPath());
@@ -344,7 +344,7 @@ trait Upload
         $domain = config('app.domain', 'default');
         $sid = substr(md5($domain . $this->_name), 8, 16);
 
-        $root = $this->getSetting('path.root', 'upload');
+        $root = $this->getSetting('root', 'upload');
         $replace_pairs = [
             '{domain}' => $domain,
             '{sid}' => $sid,

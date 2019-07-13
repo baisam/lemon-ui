@@ -38,14 +38,17 @@ return [
 
         'default' => [
             'disk' => 'default', // return storage root path and url
-            'path' => [
-                'root'   => '/{sid}/{uid}',
-                'format' => '{year}/{month}/{day}/{dispersion}'
-            ],
+            'root' => '{domain}',
+            'path' => '{year}/{month}/{day}/{dispersion}',
             'allowFileTypes' => ['image'],
             'allowExtensions'=> ['jpg', 'png', 'gif'],
-            'maxFileSize'    => 10240, // 10M
-            'uniqueName'     => false
+            'maxFileSize'    => 10737418240, // 10M
+            'maxFileCount'   => 1,
+            'uniqueName'     => false,
+            'uploadUrl'      => '',
+            'deleteUrl'      => '',
+            'previewUrl'     => '',
+            'downloadUrl'    => ''
         ],
 
         /*'image' => [],
@@ -146,7 +149,7 @@ return [
 
         'form.checkbox'  => ['icheck'],
         'form.radio'     => ['icheck'],
-        'form.file'      => ['fileinput', 'kvsortable'],
+        'form.file'      => ['fileinput'],
         'form.select'    => [],
         'form.input'     => ['inputmask'],
         'form.text'      => ['inputmask'],
