@@ -91,6 +91,9 @@
 @endphp
 @script
 $('#{{ $submitButton->getId() }}').closest('form').submit(function(event) {
+    if (typeof(getCKEditorData) == 'function') {
+        getCKEditorData()
+    }
     $.pjax.submit(event, @json($options));
     return false;
 });

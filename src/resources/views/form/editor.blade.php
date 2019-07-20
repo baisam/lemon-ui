@@ -4,3 +4,11 @@ $(function() {
   CKEDITOR.replace('{{ $id }}');
 });
 @endscript
+
+@script
+
+function getCKEditorData() {
+  $('#{{ $id }}').val(CKEDITOR.instances.{{ $id }}.getData())
+}
+
+@endscript
