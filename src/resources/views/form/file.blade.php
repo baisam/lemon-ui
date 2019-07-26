@@ -1,4 +1,4 @@
-<input id="{{ $id }}" type="file" class="{{ $class }}" name="{{ $name }}[]" {!! $attributes !!} />
+<input id="{{ $id }}" type="file" class="{{ $class }}" name="{{ $name .($multiple ? '[]' : '') }}" {!! $attributes !!} />
 <input type="hidden" name="_{{ $name }}" value="{{ $uploadKey }}" />
 @isset($deleteUrl)
 @section('dialog')
@@ -57,7 +57,7 @@
     '    <div class="clearfix"></div>' .
     '</div>'
         ],
-        'otherActionButtons' => '<input type="hidden" name="'. e($name) .'[]" {dataKey} value="##GUID##" />',
+        'otherActionButtons' => '<input type="hidden" name="'. e($name) .($multiple ? '[]' : '').'" {dataKey} value="##GUID##" />',
         'browseLabel' => '浏览',
         'removeLabel' => '删除',
         'uploadLabel' => '上传',
@@ -113,7 +113,7 @@
     $config['fileActionSettings'] = array_merge(array_only($config, [
         'showDelete', 'showRemove', 'showUpload', 'showZoom', 'showDrag']), $config['fileActionSettings']);
 
-    if (isset($multiple) && $multiple) {
+    if ($multiple) {
         $config['maxFileCount'] = isset($maxFileCount) ? $maxFileCount : 5;
         $config['showPreview'] = true;
     }
