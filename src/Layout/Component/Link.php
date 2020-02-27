@@ -13,6 +13,7 @@ namespace BaiSam\UI\Layout\Component;
 
 use BaiSam\UI\Element;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 
 class Link extends Element
 {
@@ -81,7 +82,7 @@ class Link extends Element
      */
     public function setId($id)
     {
-        $this->id = snake_case($id);
+        $this->id = Str::snake($id);
 
         return $this;
     }

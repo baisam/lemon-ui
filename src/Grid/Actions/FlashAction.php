@@ -14,6 +14,7 @@ namespace BaiSam\UI\Grid\Actions;
 use BaiSam\UI\Grid\Action;
 use BaiSam\UI\Grid\Traits\ActionRender;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 
 class FlashAction implements Htmlable, Action
@@ -29,7 +30,7 @@ class FlashAction implements Htmlable, Action
      */
     public function __construct(...$keys)
     {
-        $keys = array_flatten($keys);
+        $keys = Arr::flatten($keys);
         // 排除保留字
         $keys = array_diff($keys, ['_method', '_token', 'op']);
 

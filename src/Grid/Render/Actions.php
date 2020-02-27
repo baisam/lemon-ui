@@ -16,6 +16,7 @@ use BadMethodCallException;
 use BaiSam\UI\Grid\Action;
 use BaiSam\UI\Grid\Render as AbstractRender;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 /**
  * Class Actions
@@ -83,7 +84,7 @@ class Actions extends AbstractRender
     public function __call($name, $arguments)
     {
         if (in_array($name, $this->supportActionNames)) {
-            $name = studly_case($name);
+            $name = Str::studly($name);
             $class = "BaiSam\\UI\\Grid\\Actions\\{$name}Action";
             $action = new $class(...$arguments);
 

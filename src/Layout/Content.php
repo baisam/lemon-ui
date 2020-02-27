@@ -13,6 +13,8 @@ namespace BaiSam\UI\Layout;
 
 use BaiSam\UI\Element;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\MessageBag;
 
 /**
@@ -70,7 +72,7 @@ class Content extends Element implements Renderable
      */
     public function setId($id)
     {
-        $this->id = snake_case($id);
+        $this->id = Str::snake($id);
 
         return $this;
     }
@@ -124,7 +126,7 @@ class Content extends Element implements Renderable
     protected function getHelp()
     {
         if (isset($this->help)) {
-            return array_wrap($this->help);
+            return Arr::wrap($this->help);
         }
 
         return null;
@@ -159,7 +161,7 @@ class Content extends Element implements Renderable
         if (isset($this->content)) {
             ob_start();
 
-            foreach (array_wrap($this->content) as $item) {
+            foreach (Arr::wrap($this->content) as $item) {
                 if ($item instanceof Renderable) {
                     echo $item->render();
                 }

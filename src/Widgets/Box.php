@@ -13,6 +13,7 @@ namespace BaiSam\UI\Widgets;
 
 use BaiSam\UI\Element;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Str;
 
 class Box extends Element implements Renderable
 {
@@ -47,7 +48,7 @@ class Box extends Element implements Renderable
      */
     public function title($title)
     {
-        $this->title = title_case($title);
+        $this->title = Str::title($title);
 
         return $this;
     }

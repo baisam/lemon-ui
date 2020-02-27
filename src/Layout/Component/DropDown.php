@@ -12,6 +12,8 @@ namespace BaiSam\UI\Layout\Component;
 
 
 use BaiSam\UI\Element;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class DropDown extends Element
 {
@@ -53,7 +55,7 @@ class DropDown extends Element
     {
         $this->title = $title;
         if (isset($items)) {
-            $this->items = array_wrap($items);
+            $this->items = Arr::wrap($items);
         }
 
         // Load the styles.
@@ -69,7 +71,7 @@ class DropDown extends Element
      */
     public function setId($id)
     {
-        $this->id = snake_case($id);
+        $this->id = Str::snake($id);
 
         return $this;
     }

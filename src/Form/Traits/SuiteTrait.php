@@ -11,6 +11,8 @@
 namespace BaiSam\UI\Form\Traits;
 
 
+use Illuminate\Support\Arr;
+
 trait SuiteTrait
 {
     /**
@@ -20,11 +22,11 @@ trait SuiteTrait
 
     /**
      * @param string $name
-     * @return Field
+     * @return \BaiSam\UI\Form\Field
      */
     public function find($name)
     {
-        return array_first($this->getAccessories(), function($field) use($name) {
+        return Arr::first($this->getAccessories(), function($field) use($name) {
             return $field->column() === $name;
         });
     }
@@ -96,7 +98,7 @@ trait SuiteTrait
     public function setValue($value)
     {
         foreach ($this->getAccessories() as $field) {
-            $field->setValue(array_get($value, $field->column()));
+            $field->setValue(Arr::get($value, $field->column()));
         }
 
         $this->value = $value;
@@ -111,7 +113,7 @@ trait SuiteTrait
     public function setDefault($default)
     {
         foreach ($this->getAccessories() as $field) {
-            $field->setDefault(array_get($default, $field->column()));
+            $field->setDefault(Arr::get($default, $field->column()));
         }
 
         $this->default = $default;
@@ -126,7 +128,7 @@ trait SuiteTrait
     public function setOriginal($original)
     {
         foreach ($this->getAccessories() as $field) {
-            $field->setOriginal(array_get($original, $field->column()));
+            $field->setOriginal(Arr::get($original, $field->column()));
         }
 
         $this->original = $original;

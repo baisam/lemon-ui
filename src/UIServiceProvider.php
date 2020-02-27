@@ -10,6 +10,7 @@ namespace BaiSam\UI;
 
 use BaiSam\UI\Form\Helper as FormHelper;
 use BaiSam\UI\Grid\Helper as GridHelper;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -91,9 +92,9 @@ class UIServiceProvider extends ServiceProvider
             $configuration = $app['config']['ui'];
 
             // 将新配置的UI资源导入$resources
-            $resource = new UIRepository($app, array_get($configuration, 'resources', []));
+            $resource = new UIRepository($app, Arr::get($configuration, 'resources', []));
             // Set base url for the form repository.
-            $resource->setBaseUrl(array_get($configuration, 'baseUrl', ''));
+            $resource->setBaseUrl(Arr::get($configuration, 'baseUrl', ''));
 
             $this->registerBladeDirectives();
 

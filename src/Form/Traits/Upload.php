@@ -13,6 +13,8 @@ namespace BaiSam\UI\Form\Traits;
 
 use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -112,7 +114,7 @@ trait Upload
     protected function initUpload($name = 'default')
     {
         // 从缓存中读取配置信息
-        if (starts_with($name, '#UPLS')) {
+        if (Str::start($name, '#UPLS')) {
             $setting = Cache::get($name);
             if (isset($setting)) {
                 $name = $setting['name'];
@@ -168,11 +170,11 @@ trait Upload
         $this->maxFileCount  = $this->getSetting('maxFileCount', $this->maxFileCount);
         $this->useUniqueName = $this->getSetting('uniqueName', false);
 
-        $extensions = array_wrap($this->getSetting('allowExtensions', []));
-        $fileTypes = array_wrap($this->getSetting('allowFileTypes', []));
+        $extensions = Arr::wrap($this->getSetting('allowExtensions', []));
+        $fileTypes = Arr::wrap($this->getSetting('allowFileTypes', []));
 
         foreach ($fileTypes as $fileType) {
-            $extensions = array_merge($extensions, array_get($this->defaultTypes, $fileType, []));
+            $extensions = array_merge($extensions, Arr::get($this->defaultTypes, $fileType, []));
         }
 
         $this->extensions = array_unique($extensions);
@@ -191,7 +193,7 @@ trait Upload
             return $this->setting;
         }
 
-        return array_get($this->setting, $name, $default);
+        return Arr::get($this->setting, $name, $default);
     }
 
     /**

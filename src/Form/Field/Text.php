@@ -12,6 +12,7 @@ use BaiSam\UI\Form\Field;
 use BaiSam\UI\UIRepository;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Arr;
 
 class Text extends Field
 {
@@ -77,7 +78,7 @@ class Text extends Field
             return $style;
         }
 
-        return array_get($this->styles, 'input.'. $key, $default);
+        return Arr::get($this->styles, 'input.'. $key, $default);
     }
 
     protected function loadResources()

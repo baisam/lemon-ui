@@ -14,6 +14,7 @@ namespace BaiSam\UI\Grid;
 use BaiSam\UI\Form\Field;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Str;
 
 /**
  * Class Filter
@@ -83,7 +84,7 @@ class Filter implements Htmlable
     public function __construct($name, $label = null)
     {
         $this->name = $name;
-        $this->label = isset($label) ? title_case($label) : '';
+        $this->label = isset($label) ? Str::title($label) : '';
 
         // make form helper
         $this->helper = app('form.helper');
@@ -224,7 +225,7 @@ class Filter implements Htmlable
             }
         }
         else {
-            throw new BadMethodCallException($method .' does not exist');
+            throw new \BadMethodCallException($method .' does not exist');
         }
 
         return $this;

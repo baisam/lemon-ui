@@ -11,10 +11,10 @@
 namespace BaiSam\UI\Grid\Actions;
 
 
-use BadMethodCallException;
 use BaiSam\UI\Element;
 use BaiSam\UI\Grid\Action;
 use BaiSam\UI\Grid\Traits\ActionRender;
+use Illuminate\Support\Str;
 
 /**
  * Class ManyActions
@@ -122,7 +122,7 @@ class ManyActions extends Element implements Action
     public function __call($name, $arguments)
     {
         if (in_array($name, $this->supportActionNames)) {
-            $name = studly_case($name);
+            $name = Str::studly($name);
             $class = "BaiSam\\UI\\Grid\\Actions\\{$name}Action";
             $action = new $class(...$arguments);
 

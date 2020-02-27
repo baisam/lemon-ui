@@ -49,7 +49,7 @@ class Radio extends Field
      *
      * @return $this
      */
-    public function color($color = UIRepository::STYLE_COLOR_DEFAULT)
+    public function color($color = UIRepository::STYLE_DEFAULT)
     {
         $this->color = $color;
 

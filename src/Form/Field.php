@@ -10,6 +10,8 @@ namespace BaiSam\UI\Form;
 
 use BaiSam\UI\Element;
 use BaiSam\Contracts\Sortable;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class Field extends Element implements Sortable
 {
@@ -128,7 +130,7 @@ class Field extends Element implements Sortable
     protected $view = 'ui::form';
 
     /**
-     * @var \BaiSam\UI\FormHelper
+     * @var \BaiSam\UI\Form\Helper
      */
     protected $helper;
 
@@ -143,7 +145,7 @@ class Field extends Element implements Sortable
     {
         parent::__construct($column);
 
-        $this->label = isset($label) ? e($label) : title_case($column);
+        $this->label = isset($label) ? e($label) : Str::title($column);
 
         $this->column = $column;
 
@@ -430,7 +432,7 @@ class Field extends Element implements Sortable
             $this->config = array_merge($this->config, $name);
         }
         else {
-            array_set($this->config, (string)$name, $value);
+            Arr::set($this->config, (string)$name, $value);
         }
 
         return $this;

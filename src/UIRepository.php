@@ -9,6 +9,7 @@
 namespace BaiSam\UI;
 
 use ArrayAccess;
+use InvalidArgumentException;
 
 /**
  * Class ResourceManager

@@ -16,6 +16,7 @@ use BaiSam\UI\Form\Traits\Options;
 use BaiSam\UI\Grid\Action;
 use BaiSam\UI\Grid\Traits\ActionRender;
 use BaiSam\UI\UIRepository;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 
 class RadioAction extends Element implements Action
@@ -79,7 +80,7 @@ class RadioAction extends Element implements Action
      *
      * @return $this
      */
-    public function color($color = UIRepository::STYLE_COLOR_DEFAULT)
+    public function color($color = UIRepository::STYLE_DEFAULT)
     {
         $this->color = $color;
 
@@ -88,7 +89,7 @@ class RadioAction extends Element implements Action
 
     protected function formatClass()
     {
-        $this->addClass(array_get($this->styles, 'button.color.'. $this->color, $this->color));
+        $this->addClass(Arr::get($this->styles, 'button.color.'. $this->color, $this->color));
 
         return parent::formatClass();
     }

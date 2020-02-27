@@ -15,6 +15,8 @@ use BaiSam\UI\Grid\Action;
 use BaiSam\UI\UIRepository;
 use BaiSam\UI\Layout\Component\Link;
 use BaiSam\UI\Grid\Traits\ActionRender;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class LinkAction extends Link implements Action
 {
@@ -44,7 +46,7 @@ class LinkAction extends Link implements Action
      */
     public function __construct($name, $label)
     {
-        $this->id    = snake_case($name);
+        $this->id    = Str::snake($name);
         $this->name = $name;
 
         parent::__construct($label, null);
@@ -71,7 +73,7 @@ class LinkAction extends Link implements Action
 
     protected function formatClass()
     {
-        $this->addClass(array_get($this->styles, 'button.color.'. $this->color, $this->color));
+        $this->addClass(Arr::get($this->styles, 'button.color.'. $this->color, $this->color));
 
         return parent::formatClass();
     }

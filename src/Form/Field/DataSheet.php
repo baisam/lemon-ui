@@ -15,9 +15,10 @@ use BaiSam\UI\Form\Field;
 use BaiSam\UI\Form\Suite;
 use BaiSam\UI\Grid\Builder as Grid;
 use BaiSam\UI\Grid\Render\Actions;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Illuminate\Support\Collection;
 
 /**
  * Class DataSheet
@@ -154,7 +155,7 @@ class DataSheet extends Field implements Suite
      */
     public function find($name)
     {
-        return array_first($this->fields, function($field) use($name) {
+        return Arr::first($this->fields, function($field) use($name) {
             return $field->column() === $name;
         });
     }
@@ -166,7 +167,7 @@ class DataSheet extends Field implements Suite
      */
     public function hasFile()
     {
-        $file = array_first($this->fields, function ($field) {
+        $file = Arr::first($this->fields, function ($field) {
             if ($field instanceof Suite) {
                 return $field->hasFile();
             }

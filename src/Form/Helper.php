@@ -10,6 +10,7 @@ namespace BaiSam\UI\Form;
 
 
 use BaiSam\UI\UIRepository;
+use Illuminate\Support\Arr;
 use Illuminate\Contracts\Container\Container;
 
 /**
@@ -151,7 +152,7 @@ class Helper
      */
     public function findFieldClass($type)
     {
-        $class = array_get($this->availableFields, $type);
+        $class = Arr::get($this->availableFields, $type);
 
         if (class_exists($class)) {
             return $class;
@@ -191,7 +192,7 @@ class Helper
      */
     public function getConfig($key, $default = null)
     {
-        return array_get($this->config, strtolower($key), $default);
+        return Arr::get($this->config, strtolower($key), $default);
     }
 
     //TODO 合并表单字段属性

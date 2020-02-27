@@ -14,6 +14,7 @@ namespace BaiSam\UI\Grid\Render;
 use Closure;
 use BaiSam\UI\Grid\Traits\RenderBefore;
 use BaiSam\UI\Grid\Render as AbstractRender;
+use Illuminate\Support\Arr;
 
 class Badge extends AbstractRender
 {
@@ -74,8 +75,8 @@ class Badge extends AbstractRender
 
     protected function buildValue($value)
     {
-        if (isset($this->values) && array_has($this->values, $value)) {
-            $value = array_get($this->values, $value);
+        if (isset($this->values) && Arr::has($this->values, $value)) {
+            $value = Arr::get($this->values, $value);
         }
 
         return $value;
@@ -85,7 +86,7 @@ class Badge extends AbstractRender
     {
         if (isset($this->color)) {
             if (is_array($this->color)) {
-                return array_has($this->color, $value) ? array_get($this->color, $value) : null;
+                return Arr::has($this->color, $value) ? Arr::get($this->color, $value) : null;
             }
             if (is_callable($this->color)) {
                 return call_user_func($this->color, $value);

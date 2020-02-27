@@ -169,7 +169,7 @@ class Menu extends Element implements Sortable
     /**
      * @param float|null $weight
      *
-     * @return $this
+     * @return $this|int
      */
     public function weight($weight = null)
     {

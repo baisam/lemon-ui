@@ -10,6 +10,7 @@
 
 namespace BaiSam\UI;
 
+use InvalidArgumentException;
 
 trait ManagesResources
 {
@@ -83,7 +84,7 @@ trait ManagesResources
      * Stop injecting into a script handle.
      *
      * @return string
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function stopScript()
     {

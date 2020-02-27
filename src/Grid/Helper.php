@@ -10,6 +10,7 @@ namespace BaiSam\UI\Grid;
 
 
 use BaiSam\UI\UIRepository;
+use Illuminate\Support\Arr;
 use Illuminate\Contracts\Container\Container;
 
 /**
@@ -132,7 +133,7 @@ class Helper
      */
     public function findRenderClass($type)
     {
-        $class = array_get($this->availableRenders, $type);
+        $class = Arr::get($this->availableRenders, $type);
 
         if (class_exists($class)) {
             return $class;
@@ -172,7 +173,7 @@ class Helper
      */
     public function getConfig($key, $default = null)
     {
-        return array_get($this->config, strtolower($key), $default);
+        return Arr::get($this->config, strtolower($key), $default);
     }
 
 }

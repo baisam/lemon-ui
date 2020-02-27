@@ -10,10 +10,8 @@ namespace BaiSam\UI\Layout\Component;
 use Countable;
 use BaiSam\UI\Element;
 use BaiSam\Contracts\Sortable;
-use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\HtmlString;
 
 /**
  * 导航tabs,pills
@@ -202,7 +200,7 @@ class Navigation extends Element implements Countable
      * @return string
      */
     protected function getStyle($key, $default = null) {
-        return array_get($this->styles, 'nav.'.$key, $default);
+        return Arr::get($this->styles, 'nav.'.$key, $default);
     }
 
     /**

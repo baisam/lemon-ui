@@ -16,6 +16,7 @@ use BaiSam\UI\UIRepository;
 use BaiSam\UI\Form\Traits\Options;
 use BaiSam\UI\Grid\Action;
 use BaiSam\UI\Grid\Traits\ActionRender;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 
 class BulkAction extends Element implements Action
@@ -90,7 +91,7 @@ class BulkAction extends Element implements Action
 
     protected function formatClass()
     {
-        $this->addClass(array_get($this->styles, 'button.color.'. $this->color, $this->color));
+        $this->addClass(Arr::get($this->styles, 'button.color.'. $this->color, $this->color));
 
         return parent::formatClass();
     }

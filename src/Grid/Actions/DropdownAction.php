@@ -18,6 +18,8 @@ use BaiSam\UI\UIRepository;
 use BaiSam\UI\Grid\Traits\ActionRender;
 use BaiSam\UI\Layout\Component\DropDown;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class DropdownAction extends DropDown implements Action
 {
@@ -43,7 +45,7 @@ class DropdownAction extends DropDown implements Action
     {
         parent::__construct($label);
 
-        $this->id    = snake_case($name);
+        $this->id    = Str::snake($name);
 
         if ($callback) {
             call_user_func($callback, $this);
@@ -71,7 +73,7 @@ class DropdownAction extends DropDown implements Action
 
     protected function formatClass()
     {
-        $this->addClass(array_get($this->styles, 'button.color.'. $this->color, $this->color));
+        $this->addClass(Arr::get($this->styles, 'button.color.'. $this->color, $this->color));
 
         return parent::formatClass();
     }

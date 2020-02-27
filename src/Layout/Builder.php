@@ -14,10 +14,12 @@ use BaiSam\UI\Layout\Component\Sidebar;
 use BaiSam\UI\Layout\Component\Navbar;
 use BaiSam\UI\Layout\Component\Navigation;
 use BaiSam\UI\Layout\Component\Breadcrumb;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Http\Response;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\Support\Responsable;
-use Illuminate\Http\Response;
 
 /**
  * 页面布局类
@@ -135,7 +137,7 @@ class Builder extends Element implements Renderable, Responsable
             parent::__construct($name);
 
             $this->name = $name;
-            $this->title = title_case($name);
+            $this->title = Str::title($name);
 
             // 加载布局配置
             $this->config = config('ui.layouts.'. $name, []);
@@ -146,7 +148,7 @@ class Builder extends Element implements Renderable, Responsable
 
         if (!empty($this->config)) {
             // 设置渲染模板
-            $this->view = array_get($this->config, 'view', null);
+            $this->view = Arr::get($this->config, 'view', null);
             // 加载默认内容
             $this->loadDefaultNavbar();
             $this->loadDefaultSidebar();
@@ -326,7 +328,7 @@ class Builder extends Element implements Renderable, Responsable
      */
     protected function loadDefaultNavbar()
     {
-        $keys = array_keys(array_get($this->config, 'navbar', []));
+        $keys = array_keys(Arr::get($this->config, 'navbar', []));
         foreach ($keys as $key) {
             $this->navbar($key);
         }
@@ -337,7 +339,7 @@ class Builder extends Element implements Renderable, Responsable
      */
     protected function loadDefaultSidebar()
     {
-        $keys = array_keys(array_get($this->config, 'sidebar', []));
+        $keys = array_keys(Arr::get($this->config, 'sidebar', []));
         foreach ($keys as $key) {
             $this->sidebar($key);
         }
@@ -348,7 +350,7 @@ class Builder extends Element implements Renderable, Responsable
      */
     protected function loadDefaultFooter()
     {
-        foreach (array_get($this->config, 'footer', []) as $key => $item) {
+        foreach (Arr::get($this->config, 'footer', []) as $key => $item) {
             $item = $this->app->make($item);
             $this->footer($key, $item);
         }
@@ -364,7 +366,7 @@ class Builder extends Element implements Renderable, Responsable
             $sidebar = new Sidebar($name);
             $this->sidebar[$name] = $sidebar;
 
-            $items = array_get($this->config, 'sidebar.'. $name, []);
+            $items = Arr::get($this->config, 'sidebar.'. $name, []);
             foreach ($items as $item) {
                 //TODO 待优化,实际使用时进行make
                 $item = $this->app->make($item);
@@ -385,7 +387,7 @@ class Builder extends Element implements Renderable, Responsable
             $navbar = new Navbar($name);
             $this->navbar[$name] = $navbar;
 
-            $items = array_get($this->config, 'navbar.'. $name, []);
+            $items = Arr::get($this->config, 'navbar.'. $name, []);
             foreach ($items as $key => $item) {
                 if (in_array($item, ['navigation', 'form'])) {
                     call_user_func([$navbar, $item], $key);

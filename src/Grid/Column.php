@@ -14,6 +14,7 @@ use Closure;
 use BadMethodCallException;
 use BaiSam\Contracts\Sortable;
 use BaiSam\Contracts\Format;
+use Illuminate\Support\Str;
 use Illuminate\Support\HtmlString;
 
 /**
@@ -28,7 +29,6 @@ use Illuminate\Support\HtmlString;
  * @method Render\Phone             phone()
  * @method Render\Progress          progress($max = 100)
  * @method Render\Switcher          switcher()
- * @method Render\Gender            gender([] $_map = null)
  * @method Render\Tags              tags()
  *
  * @package BaiSam\UI\Grid
@@ -120,9 +120,9 @@ class Column implements Sortable
     public function __construct($name, $title = null)
     {
         $this->name = $name;
-        $this->title = $title ?: title_case($name);
+        $this->title = $title ?: Str::title($name);
 
-        $this->key = snake_case($name);
+        $this->key = Str::snake($name);
 
         // make form helper
         $this->helper = app('grid.helper');
@@ -252,7 +252,7 @@ class Column implements Sortable
     /**
      * 设置或获取权重
      * @param int|null $weight
-     * @return $this
+     * @return $this|int
      */
     public function weight($weight = null)
     {
@@ -282,7 +282,7 @@ class Column implements Sortable
     /**
      * 设置列显示宽度
      * @param int|string $width
-     * @return $this
+     * @return $this|int
      */
     public function width($width = null)
     {

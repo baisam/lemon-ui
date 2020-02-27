@@ -8,6 +8,8 @@
 namespace BaiSam\UI;
 
 use BadMethodCallException;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Contracts\Support\Renderable;
 
 class Element extends HtmlTag
@@ -57,7 +59,7 @@ class Element extends HtmlTag
             $this->type = strtolower(class_basename($this));
         }
 
-        $this->id    = snake_case($id);
+        $this->id    = Str::snake($id);
         $this->content = $content;
 
         // Load config the styles.
@@ -150,10 +152,10 @@ class Element extends HtmlTag
         }
 
         if (is_array($this->prefix)) {
-            return empty($this->prefix[0]) ? $this->id : snake_case($this->prefix[0]) .'_'. $this->id;
+            return empty($this->prefix[0]) ? $this->id : Str::snake($this->prefix[0]) .'_'. $this->id;
         }
 
-        return snake_case($this->prefix) .'_'. $this->id;
+        return Str::snake($this->prefix) .'_'. $this->id;
     }
 
     /**
@@ -180,7 +182,7 @@ class Element extends HtmlTag
      */
     protected function formatClass()
     {
-        $styles = array_get($this->styles, 'custom', []);
+        $styles = Arr::get($this->styles, 'custom', []);
         $classes = [];
         foreach ($this->classes as $class) {
             $classes[] = $styles[$class] ?? $class;
@@ -200,12 +202,12 @@ class Element extends HtmlTag
             return $default;
         }
 
-        $styles = array_get($this->styles, $this->type, []);
+        $styles = Arr::get($this->styles, $this->type, []);
         if (isset($styles[0]) && is_string($styles[0])) {
-            $styles = array_merge(array_get($this->styles, array_pull($styles, 0), []), $styles);
+            $styles = array_merge(Arr::get($this->styles, Arr::pull($styles, 0), []), $styles);
         }
 
-        return array_get($styles, strtolower($key), $default);
+        return Arr::get($styles, strtolower($key), $default);
     }
 
     /**
@@ -290,7 +292,7 @@ class Element extends HtmlTag
         if (substr($name, 0, 5) === 'class') {
             $name = substr($name, 5);
             if ($name && isset($arguments[0])) {
-                $this->whenClass($arguments[0], kebab_case($name));
+                $this->whenClass($arguments[0], Str::kebab($name));
             }
 
             return $this;

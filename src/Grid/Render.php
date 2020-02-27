@@ -10,6 +10,8 @@
 
 namespace BaiSam\UI\Grid;
 
+use Illuminate\Support\Arr;
+
 /**
  * Class Render
  *
@@ -84,10 +86,10 @@ class Render
     {
         $styles = $this->helper->getConfig('styles.'. $this->type, []);
         if (isset($styles[0]) && is_string($styles[0])) {
-            $styles = array_merge($this->helper->getConfig('styles.'. array_pull($styles, 0), []), $styles);
+            $styles = array_merge($this->helper->getConfig('styles.'. Arr::pull($styles, 0), []), $styles);
         }
 
-        return array_get($styles, strtolower($key), $default);
+        return Arr::get($styles, strtolower($key), $default);
     }
 
     /**

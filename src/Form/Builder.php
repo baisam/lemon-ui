@@ -9,6 +9,8 @@ namespace BaiSam\UI\Form;
 
 use Closure;
 use BaiSam\UI\Element;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Contracts\Support\Renderable;
 
@@ -151,7 +153,7 @@ class Builder extends Element implements Renderable
      */
     public function setId($id)
     {
-        $this->id = snake_case($id);
+        $this->id = Str::snake($id);
 
         return $this;
     }
@@ -259,7 +261,7 @@ class Builder extends Element implements Renderable
         return $this;
     }
 
-    protected function setWeight($field)
+    protected function setWeight(Field $field)
     {
         if (is_null($field->weight())) {
             $field->weight(count($this->fields));
@@ -363,7 +365,7 @@ class Builder extends Element implements Renderable
         if (isset($this->content)) {
             ob_start();
 
-            foreach (array_wrap($this->content) as $item) {
+            foreach (Arr::wrap($this->content) as $item) {
                 if ($item instanceof Renderable) {
                     echo $item->render();
                 }

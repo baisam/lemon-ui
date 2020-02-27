@@ -10,12 +10,14 @@ namespace BaiSam\UI\Grid;
 
 use Closure;
 use BaiSam\UI\Element;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Collection;
 
 class Builder extends Element implements Renderable
 {
@@ -237,7 +239,7 @@ class Builder extends Element implements Renderable
 
         $this->complexCols[$name] = [
             'name'      => $name,
-            'title'     => title_case($title),
+            'title'     => Str::title($title),
             'columns'   => $columns
         ];
 
@@ -447,7 +449,7 @@ class Builder extends Element implements Renderable
             $this->config = array_merge($this->config, $name);
         }
         else {
-            array_set($this->config, (string)$name, $value);
+            Arr::set($this->config, (string)$name, $value);
         }
 
         return $this;
@@ -554,7 +556,8 @@ class Builder extends Element implements Renderable
             $this->total = $pager->total();
             $this->setPerPage($pager->perPage());
         }
-        else if ($this->data instanceof Eloquent || $this->data instanceof \Illuminate\Database\Eloquent\Builder) {
+        else if ($this->data instanceof Eloquent
+            || $this->data instanceof \Illuminate\Database\Eloquent\Builder) {
             if ($this->usePagination) {
                 $pager = $this->data->paginate($this->perPage);
 
@@ -614,7 +617,7 @@ class Builder extends Element implements Renderable
 
         // 收集合并列名
         $complexColumns = array_column($this->complexCols, 'columns', 'name');
-        $complexColumnNames = array_collapse($complexColumns);
+        $complexColumnNames = Arr::collapse($complexColumns);
         $complexColumnFirsts = array_map(function ($columns) {return reset($columns); }, $complexColumns);
 
         $_columns = [];
@@ -713,7 +716,7 @@ class Builder extends Element implements Renderable
 
         $header = [$header];
         if (count($this->complexCols) > 0) {
-            $header[] = array_collapse(array_column($this->complexCols, 'columns'));
+            $header[] = Arr::collapse(array_column($this->complexCols, 'columns'));
         }
 
         $this->header = $header;
